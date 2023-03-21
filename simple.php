@@ -51,3 +51,12 @@ $menu_items  = wp_get_nav_menu_items(
         <?php endforeach; ?>
     </ul>
 </nav>
+<?php /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */ ?>
+
+<?php /**__________________________________________________________________________________________________________________________________
+ * Функция которая возвращает выводит дату в виде "Этот пост был написана 2 недели назад." */ ?>
+
+ <?php function return_data_last_public_post() {
+    return sprintf( esc_html__( '%s ago', 'textdomain' ), human_time_diff(get_the_time ( 'U' ), current_time( 'timestamp' ) ) );
+}
+add_filter( 'the_time', 'return_data_last_public_post' ); ?>
