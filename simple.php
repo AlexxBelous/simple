@@ -30,7 +30,7 @@ if (!is_front_page()) {
 <?php
 
 $locations = get_nav_menu_locations();
-$menu_id = $locations['menu_footer'];
+$menu_id = $locations['menu_footer']; // Где menu_footer это id локации, получено c помощью var_dump();
 $menu_items  = wp_get_nav_menu_items(
     $menu_id,
     [
@@ -54,9 +54,27 @@ $menu_items  = wp_get_nav_menu_items(
 <?php /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */ ?>
 
 <?php /**__________________________________________________________________________________________________________________________________
- * Функция которая возвращает выводит дату в виде "Этот пост был написана 2 недели назад." */ ?>
+ * Функция которая возвращает дату в виде "Этот пост был написана 2 недели назад." */ ?>
 
- <?php function return_data_last_public_post() {
-    return sprintf( esc_html__( '%s ago', 'textdomain' ), human_time_diff(get_the_time ( 'U' ), current_time( 'timestamp' ) ) );
+<?php function return_data_last_public_post()
+{
+    return sprintf(esc_html__('%s ago', 'textdomain'), human_time_diff(get_the_time('U'), current_time('timestamp')));
 }
-add_filter( 'the_time', 'return_data_last_public_post' ); ?>
+add_filter('the_time', 'return_data_last_public_post'); ?>
+<?php /**^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */ ?>
+
+
+
+
+
+<?php /**_____________________________________________________________________________________________________________________________________________ ?>
+<?php * Функции которые возвращают классический вид sidebar */ ?>
+
+<?php
+
+//Возвращает классический вид sidebars
+add_filter('gutenberg_use_widgets_block_editor', '__return_false');
+add_filter('use_widgets_block_editor', '__return_false');
+
+?>
+<?php /**^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */ ?>

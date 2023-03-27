@@ -84,7 +84,7 @@ x = 1
 -распаковать архив - sudo tar -xzvf latest.tar.gz
 
 - копируем все файлы wordpress, которые внутри -  
-  sudo rsync -av wordpress/\* /opt/lampp/htdocs/genius/
+  sudo rsync -av wordpress/* /opt/lampp/htdocs/genius/
 
   -создаем базу данных
   -создаем файл wp-confin.php
@@ -107,7 +107,7 @@ sudo chmod -R 777 name-site/
 
 ---
 
-**\*\*\*\***\*\*\*\***\*\*\*\***\*\*\*\***\*\*\*\***\*\*\*\***\*\*\*\***add domain Linux**\*\***\*\*\*\***\*\***\***\*\***\*\*\*\***\*\***
+*********************************add domain Linux*************************************************
 1)cd /opt/lampp/etc/ 2) sudo nano +488 httpd.conf 3) удаляем # на строке Include etc/extra/httpd-vhosts.conf
 
 4.  /opt/lampp/etc/extra sudo nano httpd-vhosts.conf дублируем блок <VirtualHost \*:80>
@@ -136,7 +136,7 @@ sport-island.loc
 
 ---
 
-**\*\*\*\***\*\***\*\*\*\***\*\*\***\*\*\*\***\*\***\*\*\*\***Wordpress for dev\***\*\*\*\*\***\*\*\***\*\*\*\*\***\*\*\*\***\*\*\*\*\***\*\*\***\*\*\*\*\***\
+*************************Wordpress for dev********************************************************
 
 1. В папке на сервере где будет проект, создаем файл composer.json в котором пришеи { }
 2. Пишем команду - composer require wordpress.
