@@ -114,14 +114,79 @@ $post = get_post(21);
 
 <!-- Вывод картинки с acf поля  -->
 <?php $image = get_post_meta($post->ID, 'photo', true); ?>
-<?php echo wp_get_attachment_image ( $image, 'full', false, array()) ?>
+<?php echo wp_get_attachment_image($image, 'full', false, array()) ?>
 
 <?php /**
  * ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
  * 
  */
- ?>
+?>
 
 
 
 
+
+
+<?php /**______________________________________________________________________________________________________
+ * Функция с помощь которой можно получить указанные записи.
+ * */ ?>
+<!-- Функция возвращает массив объектов -->
+
+<?php
+$results = get_posts(array(
+    'post_type' => 'houses', //указываем тип поста(по умолчанию post).
+    'posts_per_page' => 3, //получаем три записи
+    'orderby' => 'title', //вариант сортировки - по заголовку
+    'order' => 'ASC', //сама сортировка от меньшего к большему
+
+    // Вариант сортировки
+    'meta_key' => 'price', //сортируем по цене в поле acf
+    'orderby' => 'meta_value' //
+));
+
+// Вывод с помощью цикла foreach. 
+// Это пример, который показывает как работать
+// за пределами стандартного цикл 
+
+foreach ($results as $post) :
+    setup_postdata($post)
+?>
+
+    <!-- Вывод заголовка без функции setup_postdata($post) -->
+    <h1>
+        <?php echo $post->post_title; ?>
+    </h1>
+    <!-- Вывод заголовка с функцией setup_postdata($post) -->
+    <h1>
+        <?php the_title(); ?>
+    </h1>
+
+
+    <!-- Вывод контента без функции setup_postdata($post) -->
+    <p>
+        <?php echo apply_filters('the_content', $post->post_content); ?>
+    </p>
+    <!-- Вывод контента с функцией setup_postdata($post) -->
+    <p>
+        <?php the_content(); ?>
+    </p>
+
+
+    <!-- Вывод поля acf без функции setup_postdata($post) -->
+    <strong>
+        Price: <?php echo get_field('price', $post->ID); ?>
+    </strong>
+    <!-- Вывод поля acf с функцией setup_postdata($post) -->
+    <strong>
+        Price: <?php echo the_field('price'); ?>
+    </strong>
+
+
+
+<?php endforeach;
+wp_reset_postdata(); ?>
+
+<?php /** 
+ * 
+ * ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ * */ ?>
